@@ -122,6 +122,7 @@ class EmulationActivity : AppCompatActivity() {
         }
 
         settingsViewModel.settings.loadSettings()
+        InputBindingSetting.applyOdin3DefaultsIfUnmapped()
 
         screenAdjustmentUtil = ScreenAdjustmentUtil(this, windowManager, settingsViewModel.settings)
 

@@ -639,6 +639,31 @@ class InputBindingSetting(val abstractSetting: AbstractSetting, titleId: Int) :
             applyBindings(buttonMappings, axisMappings)
         }
 
+        // Odin 3: L3/R3 are free on a 3DS, use them to move the touch screen around.
+        private val odin3HotkeyMappings = listOf(
+            DefaultButtonMapping(
+                Settings.HOTKEY_SCREEN_SWAP,
+                KeyEvent.KEYCODE_BUTTON_THUMBR,
+                Hotkey.SWAP_SCREEN.button
+            ),
+            DefaultButtonMapping(
+                Settings.HOTKEY_CYCLE_LAYOUT,
+                KeyEvent.KEYCODE_BUTTON_THUMBL,
+                Hotkey.CYCLE_LAYOUT.button
+            )
+        )
+
+        /**
+         * Odin 3 build: on a fresh install with nothing mapped, map the built-in pad
+         * (Xbox layout, HAT d-pad) so games are playable without visiting the settings.
+         */
+        fun applyOdin3DefaultsIfUnmapped() {
+            val prefs = PreferenceManager.getDefaultSharedPreferences(CitraApplication.appContext)
+            if (prefs.all.keys.any { it.startsWith(INPUT_MAPPING_PREFIX) }) return
+            applyAutoMapBindings(isNintendoLayout = false, useAxisDpad = true)
+            applyBindings(odin3HotkeyMappings, emptyList())
+        }
+
         private fun applyDefaultButtonMapping(
             editor: SharedPreferences.Editor,
             mapping: DefaultButtonMapping
