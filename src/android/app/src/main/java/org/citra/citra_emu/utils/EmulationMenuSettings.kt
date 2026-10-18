@@ -52,8 +52,9 @@ object EmulationMenuSettings {
                 .putBoolean("EmulationMenuSettings_SwapScreens", value)
                 .apply()
         }
+    // Odin 3: the built-in pad is always there, keep the touch screen free of virtual buttons.
     var showOverlay: Boolean
-        get() = preferences.getBoolean("EmulationMenuSettings_ShowOverlay", true)
+        get() = preferences.getBoolean("EmulationMenuSettings_ShowOverlay", false)
         set(value) {
             preferences.edit()
                 .putBoolean("EmulationMenuSettings_ShowOverlay", value)
