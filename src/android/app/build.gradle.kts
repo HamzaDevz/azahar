@@ -109,6 +109,8 @@ android {
     buildTypes {
         // Signed by release key, allowing for upload to Play Store.
         release {
+            // Odin 3 build: own package so it installs next to the official app.
+            applicationIdSuffix = ".odin3"
             signingConfig = if (keystoreFile != null) {
                 signingConfigs.getByName("release")
             } else {

@@ -1584,6 +1584,22 @@ class EmulationFragment :
             binding.performanceOverlayShowText.visibility = View.VISIBLE
         } else {
             binding.performanceOverlayShowText.visibility = View.GONE
+            // Odin 3: no overlay, but log the stats once a second so fps can be measured over adb.
+            perfStatsUpdater = Runnable {
+                val s = NativeLibrary.getPerfStats()
+                if (s[1] > 0) {
+                    android.util.Log.i(
+                        "AzaharPerf",
+                        String.format(
+                            java.util.Locale.ROOT,
+                            "fps=%.2f sys_fps=%.2f speed=%.3f frame_ms=%.2f gpu_ms=%.2f",
+                            s[1], s[0], s[2], s[3] * 1000.0, s[6] * 1000.0
+                        )
+                    )
+                }
+                perfStatsUpdateHandler.postDelayed(perfStatsUpdater!!, 1000)
+            }
+            perfStatsUpdateHandler.post(perfStatsUpdater!!)
         }
     }
 
