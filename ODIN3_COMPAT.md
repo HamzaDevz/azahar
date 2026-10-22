@@ -17,7 +17,7 @@ Autres émulateurs : [Eden (Switch)](https://github.com/HamzaDevz/eden/blob/odin
 
 ## Comment on teste
 
-Paquet `org.azahar_emu.azahar.odin3`, lancé depuis ES-DE (règle `AZAHAR-ODIN3`) ou par adb. Notre build écrit chaque seconde `AzaharPerf: fps=… speed=… frame_ms=…` dans logcat quand l'overlay est coupé ; « fps » compte les soumissions GSP, la vraie cadence du jeu. Le banc lance le jeu, appuie sur A à l'aveugle et mesure environ 75 s : il voit le titre et l'intro, pas encore une partie.
+Paquet `org.azahar_emu.azahar.odin3`, lancé depuis ES-DE (règle `AZAHAR-ODIN3`) ou par adb. Notre build écrit chaque seconde `AzaharPerf: fps=… speed=… frame_ms=…` dans logcat quand l'overlay est coupé ; « fps » compte les soumissions GSP, la vraie cadence du jeu. Le banc lance le jeu, appuie sur A à l'aveugle et mesure environ 75 s : il voit le titre et l'intro, pas encore une partie. Depuis le 2026-10-22, le banc commun odin3-lab (`emus/azahar/`, local) rejoue aussi chaque test dans une VM qui simule la console, image par image.
 
 Config globale (`config.ini`) : Vulkan, `async_shader_compilation = 1`, grand écran à gauche et écran tactile à droite (`layout_option = 2`, paysage forcé), œil droit coupé. Le premier lancement d'un jeu compile ses shaders ; au second (cache `shaders/vulkan/transferable/`), les saccades disparaissent presque.
 
@@ -43,7 +43,7 @@ Mesure : fps médian, vitesse moyenne (1,00 = plein régime) et vitesse minimale
 | Mario Tennis Open | 🟠 Menus/intro | titre | 30 fps, vitesse 0,97, min 0,73 | 11 s mesurées seulement | 2026-10-18 | 2fc8920e9 |
 | New Super Mario Bros. 2 | 🟠 Menus/intro | titre, intro | 60 fps, vitesse 0,99, min 0,64 | | 2026-10-18 | 2fc8920e9 |
 | Paper Mario: Sticker Star | 🟠 Menus/intro | titre, intro | 30 fps, vitesse 1,00, min 0,72 | 30 fps natifs | 2026-10-18 | 2fc8920e9 |
-| Super Mario 3D Land | 🟠 Menus/intro | titre | 60 fps, vitesse 0,94, min 0,02 | banc bloqué au sélecteur de Mii ; gros à-coup de shaders à froid | 2026-10-18 | 2fc8920e9 |
+| Super Mario 3D Land | 🟠 Menus/intro | titre, démo d'attraction (3000 images) | 59-60 présentations/s sur 50 s, 0 image perdue, deux runs | banc odin3-lab validé : la VM rend les mêmes images, décalées de 50 à 70 images (démarrage plus lent sur la console) ; une nouvelle partie bloque au sélecteur de Mii (aucun Mii dans la NAND) ; le jeu demande le micro au lancement (accordé) | 2026-10-22 | 011e5df1b |
 | Super Smash Bros. for Nintendo 3DS (EU) | 🟠 Menus/intro | titre, intro | 60 fps, vitesse 0,99, min 0,80 | | 2026-10-18 | 2fc8920e9 |
 | Monster Hunter 4 Ultimate (EU) | ⚪ Non testé | | | | | |
 | `ctr-amhp.cci` (CTR-P-AMHP, 00040000000B1D00) | ⚪ Non testé | | | probablement Monster Hunter 3 Ultimate (EU) | | |
