@@ -501,6 +501,18 @@ static const char* android_config_default_file_content = (BOOST_HANA_STRING(R"(
 # Defaults to 0.
 )") DECLARE_KEY(steps_per_hour) BOOST_HANA_STRING(R"(
 
+# Where the battery state reported to the emulated system comes from
+# 0: System battery (default), 1: Fixed (battery_charging and battery_level below)
+)") DECLARE_KEY(battery_state_source) BOOST_HANA_STRING(R"(
+
+# Whether the battery is reported as charging when battery_state_source is set to Fixed
+# 0: No, 1 (default): Yes
+)") DECLARE_KEY(battery_charging) BOOST_HANA_STRING(R"(
+
+# Battery level reported when battery_state_source is set to Fixed. Range from 0 to 4.
+# Defaults to 0.
+)") DECLARE_KEY(battery_level) BOOST_HANA_STRING(R"(
+
 # Plugin loader state, if enabled plugins will be loaded from the SD card.
 # You can also set if homebrew apps are allowed to enable the plugin loader
 )") DECLARE_KEY(plugin_loader) BOOST_HANA_STRING(R"(
